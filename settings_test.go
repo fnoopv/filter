@@ -1348,11 +1348,48 @@ func TestApplySearch(t *testing.T) {
 		return
 	}
 
-	search := (&Settings[*TestScopeModel]{}).applySearch("val", schema)
+	search := (&Settings[*TestScopeModel]{}).applySearch("val", schema, Blacklist{})
 	assert.NotNil(t, search)
 	assert.ElementsMatch(t, []string{"id", "name"}, search.Fields)
 	assert.Equal(t, "val", search.Query)
 	assert.Equal(t, Operators["$cont"], search.Operator)
+}
+
+func TestApplySearchWithBlacklist(t *testing.T) {
+	db := openDryRunDB(t)
+	schema, err := parseModel(db, &TestScopeModel{})
+	if !assert.Nil(t, err) {
+		return
+	}
+
+	t.Run("blacklisted explicit field", func(t *testing.T) {
+		settings := &Settings[*TestScopeModel]{
+			FieldsSearch: []string{"email"},
+			Blacklist:    Blacklist{FieldsBlacklist: []string{"email"}},
+		}
+		search := settings.applySearch("val", schema, settings.Blacklist)
+		assert.NotNil(t, search)
+		assert.Empty(t, search.Fields)
+	})
+
+	t.Run("blacklisted relation", func(t *testing.T) {
+		settings := &Settings[*TestScopeModel]{
+			FieldsSearch: []string{"Relation.a", "name"},
+			Blacklist:    Blacklist{RelationsBlacklist: []string{"Relation"}},
+		}
+		search := settings.applySearch("val", schema, settings.Blacklist)
+		assert.NotNil(t, search)
+		assert.Equal(t, []string{"name"}, search.Fields)
+	})
+
+	t.Run("allowed relation field", func(t *testing.T) {
+		settings := &Settings[*TestScopeModel]{
+			FieldsSearch: []string{"Relation.a", "name"},
+		}
+		search := settings.applySearch("val", schema, settings.Blacklist)
+		assert.NotNil(t, search)
+		assert.Equal(t, []string{"Relation.a", "name"}, search.Fields)
+	})
 }
 
 func TestSelectScope(t *testing.T) {

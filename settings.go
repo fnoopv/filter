@@ -216,7 +216,7 @@ func (s *Settings[T]) scopeCommon(db *gorm.DB, request *Request, dest any) (*gor
 	}
 
 	if !s.DisableSearch && request.Search.Present {
-		if search := s.applySearch(request.Search.Val, schema); search != nil {
+		if search := s.applySearch(request.Search.Val, schema, s.Blacklist); search != nil {
 			if scope := search.Scope(schema); scope != nil {
 				db = db.Scopes(scope)
 			}
@@ -323,13 +323,21 @@ func groupFilters(scopes []func(*gorm.DB) *gorm.DB, and bool) func(*gorm.DB) *go
 	}
 }
 
-func (s *Settings[T]) applySearch(query string, schema *schema.Schema) *Search {
+func (s *Settings[T]) applySearch(query string, schema *schema.Schema, blacklist Blacklist) *Search {
 	// Note: the search condition is not in a group condition (parenthesis)
 	fields := s.FieldsSearch
 	if fields == nil {
-		for _, f := range getSelectableFields(&s.Blacklist, schema) {
+		for _, f := range getSelectableFields(&blacklist, schema) {
 			fields = append(fields, f.DBName)
 		}
+	} else {
+		allowed := make([]string, 0, len(fields))
+		for _, f := range fields {
+			if field, _, _ := getField(f, schema, &blacklist); field != nil {
+				allowed = append(allowed, f)
+			}
+		}
+		fields = allowed
 	}
 
 	operator := s.SearchOperator
