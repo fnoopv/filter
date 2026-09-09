@@ -515,7 +515,7 @@ func TestStarts(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`test_models`.`name` LIKE ?", Vars: []any{"te\\%\\_st%"}},
+							clause.Expr{SQL: "`test_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"te\\%\\_st%"}},
 						},
 					},
 				},
@@ -532,7 +532,7 @@ func TestStarts(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) LIKE ?", Vars: []any{"te\\%\\_st%"}},
+							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) LIKE ? ESCAPE '\\'", Vars: []any{"te\\%\\_st%"}},
 						},
 					},
 				},
@@ -596,7 +596,7 @@ func TestEnds(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`test_models`.`name` LIKE ?", Vars: []any{"%te\\%\\_st"}},
+							clause.Expr{SQL: "`test_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%te\\%\\_st"}},
 						},
 					},
 				},
@@ -613,7 +613,7 @@ func TestEnds(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) LIKE ?", Vars: []any{"%te\\%\\_st"}},
+							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) LIKE ? ESCAPE '\\'", Vars: []any{"%te\\%\\_st"}},
 						},
 					},
 				},
@@ -677,7 +677,7 @@ func TestContains(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`test_models`.`name` LIKE ?", Vars: []any{"%te\\%\\_st%"}},
+							clause.Expr{SQL: "`test_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%te\\%\\_st%"}},
 						},
 					},
 				},
@@ -694,7 +694,7 @@ func TestContains(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) LIKE ?", Vars: []any{"%te\\%\\_st%"}},
+							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) LIKE ? ESCAPE '\\'", Vars: []any{"%te\\%\\_st%"}},
 						},
 					},
 				},
@@ -758,7 +758,7 @@ func TestNotContains(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`test_models`.`name` NOT LIKE ?", Vars: []any{"%te\\%\\_st%"}},
+							clause.Expr{SQL: "`test_models`.`name` NOT LIKE ? ESCAPE '\\'", Vars: []any{"%te\\%\\_st%"}},
 						},
 					},
 				},
@@ -775,7 +775,7 @@ func TestNotContains(t *testing.T) {
 					Name: "WHERE",
 					Expression: clause.Where{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) NOT LIKE ?", Vars: []any{"%te\\%\\_st%"}},
+							clause.Expr{SQL: "CAST(`test_models`.`name` AS TEXT) NOT LIKE ? ESCAPE '\\'", Vars: []any{"%te\\%\\_st%"}},
 						},
 					},
 				},

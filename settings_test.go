@@ -124,8 +124,8 @@ func TestScope(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -217,8 +217,8 @@ func TestScopeUnpaginated(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -297,8 +297,8 @@ func TestScopeDisableFields(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -317,7 +317,7 @@ func TestScopeDisableFields(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -381,8 +381,8 @@ func TestScopeUnpaginatedDisableFields(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -401,7 +401,7 @@ func TestScopeUnpaginatedDisableFields(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -457,7 +457,7 @@ func TestScopeDisableFilter(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -518,7 +518,7 @@ func TestScopeUnpaginatedDisableFilter(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -577,8 +577,8 @@ func TestScopeDisableSort(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -597,7 +597,7 @@ func TestScopeDisableSort(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -648,8 +648,8 @@ func TestScopeUnpaginatedDisableSort(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -668,7 +668,7 @@ func TestScopeUnpaginatedDisableSort(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -714,8 +714,8 @@ func TestScopeDisableJoin(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -734,7 +734,7 @@ func TestScopeDisableJoin(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -798,8 +798,8 @@ func TestScopeUnpaginatedDisableJoin(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -818,7 +818,7 @@ func TestScopeUnpaginatedDisableJoin(t *testing.T) {
 					clause.AndConditions{
 						Exprs: []clause.Expression{
 							clause.Expr{
-								SQL:                "`test_scope_models`.`email` LIKE ?",
+								SQL:                "`test_scope_models`.`email` LIKE ? ESCAPE '\\'",
 								Vars:               []any{"%val%"},
 								WithoutParentheses: false,
 							},
@@ -877,8 +877,8 @@ func TestScopeDisableSearch(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -953,8 +953,8 @@ func TestScopeUnpaginatedDisableSearch(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -1132,8 +1132,8 @@ func TestApplyFiltersAnd(t *testing.T) {
 						Exprs: []clause.Expression{
 							clause.AndConditions{
 								Exprs: []clause.Expression{
-									clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-									clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+									clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+									clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 								},
 							},
 						},
@@ -1179,12 +1179,12 @@ func TestApplyFiltersOr(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.OrConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 										},
 									},
 									clause.OrConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -1236,8 +1236,8 @@ func TestApplyFiltersMixed(t *testing.T) {
 								Exprs: []clause.Expression{
 									clause.AndConditions{
 										Exprs: []clause.Expression{
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
-											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val2%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
+											clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val2%"}},
 										},
 									},
 								},
@@ -1293,7 +1293,7 @@ func TestApplyFiltersWithJoin(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`Relation`.`name` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`Relation`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -1447,7 +1447,7 @@ func TestSettingsComputedFieldWithAutoFields(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`Relation`.`a` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`Relation`.`a` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -1530,7 +1530,7 @@ func TestSettingsSelectWithExistingJoin(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`Relation`.`a` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`Relation`.`a` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -1621,7 +1621,7 @@ func TestSettingsSelectWithExistingJoinAndComputed(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`Relation`.`a` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`Relation`.`a` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -1704,7 +1704,7 @@ func TestSettingsSelectWithExistingJoinAndComputedOmit(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`Relation`.`a` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`Relation`.`a` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -1870,7 +1870,7 @@ func TestSettingsDefaultSort(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -1944,7 +1944,7 @@ func TestSettingsDefaultSort(t *testing.T) {
 				Exprs: []clause.Expression{
 					clause.AndConditions{
 						Exprs: []clause.Expression{
-							clause.Expr{SQL: "`test_scope_models`.`name` LIKE ?", Vars: []any{"%val1%"}},
+							clause.Expr{SQL: "`test_scope_models`.`name` LIKE ? ESCAPE '\\'", Vars: []any{"%val1%"}},
 						},
 					},
 				},
@@ -2122,4 +2122,45 @@ func TestScopeWithCaseInsensitiveSort(t *testing.T) {
 		},
 	}
 	assert.Equal(t, expected, paginator.DB.Statement.Clauses)
+}
+
+type TestScopeLikeModel struct {
+	Word string
+	ID   uint
+}
+
+func TestScopeLikeEscape(t *testing.T) {
+	db, err := gorm.Open(sqlite.Open("file:test_scope_like_escape?mode=memory&cache=shared"), &gorm.Config{})
+	require.NoError(t, err)
+	require.NoError(t, db.AutoMigrate(&TestScopeLikeModel{}))
+	rows := []TestScopeLikeModel{
+		{Word: "50%"},
+		{Word: "fifty"},
+		{Word: "under_score"},
+		{Word: `a\b`},
+		{Word: "plain"},
+	}
+	require.NoError(t, db.Create(&rows).Error)
+
+	query := func(value string) []TestScopeLikeModel {
+		results := []TestScopeLikeModel{}
+		request := &Request{Filter: typeutil.NewUndefined([]*Filter{
+			{Field: "word", Operator: Operators["$cont"], Args: []string{value}},
+		})}
+		tx := (&Settings[TestScopeLikeModel]{}).ScopeUnpaginated(db, request, &results)
+		require.NoError(t, tx.Error)
+		return results
+	}
+	words := func(results []TestScopeLikeModel) []string {
+		out := make([]string, 0, len(results))
+		for _, r := range results {
+			out = append(out, r.Word)
+		}
+		return out
+	}
+
+	assert.Equal(t, []string{"50%"}, words(query("50%")))
+	assert.Equal(t, []string{"under_score"}, words(query("under_score")))
+	assert.Equal(t, []string{`a\b`}, words(query(`a\b`)))
+	assert.Equal(t, []string{"fifty"}, words(query("fifty")))
 }

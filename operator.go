@@ -2,9 +2,9 @@ package filter
 
 import (
 	"fmt"
+	"strings"
 
 	"gorm.io/gorm"
-	"goyave.dev/goyave/v5/util/sqlutil"
 )
 
 // Operator used by filters to build the SQL query.
@@ -36,8 +36,8 @@ var (
 				if dataType != DataTypeText && dataType != DataTypeEnum {
 					return filter.Where(tx, "FALSE")
 				}
-				query := castEnumAsText(column, dataType) + " LIKE ?"
-				value := sqlutil.EscapeLike(filter.Args[0]) + "%"
+				query := castEnumAsText(column, dataType) + " LIKE ? ESCAPE '\\'"
+				value := escapeLike(filter.Args[0]) + "%"
 				return filter.Where(tx, query, value)
 			},
 			RequiredArguments: 1,
@@ -47,8 +47,8 @@ var (
 				if dataType != DataTypeText && dataType != DataTypeEnum {
 					return filter.Where(tx, "FALSE")
 				}
-				query := castEnumAsText(column, dataType) + " LIKE ?"
-				value := "%" + sqlutil.EscapeLike(filter.Args[0])
+				query := castEnumAsText(column, dataType) + " LIKE ? ESCAPE '\\'"
+				value := "%" + escapeLike(filter.Args[0])
 				return filter.Where(tx, query, value)
 			},
 			RequiredArguments: 1,
@@ -58,8 +58,8 @@ var (
 				if dataType != DataTypeText && dataType != DataTypeEnum {
 					return filter.Where(tx, "FALSE")
 				}
-				query := castEnumAsText(column, dataType) + " LIKE ?"
-				value := "%" + sqlutil.EscapeLike(filter.Args[0]) + "%"
+				query := castEnumAsText(column, dataType) + " LIKE ? ESCAPE '\\'"
+				value := "%" + escapeLike(filter.Args[0]) + "%"
 				return filter.Where(tx, query, value)
 			},
 			RequiredArguments: 1,
@@ -69,8 +69,8 @@ var (
 				if dataType != DataTypeText && dataType != DataTypeEnum {
 					return filter.Where(tx, "FALSE")
 				}
-				query := castEnumAsText(column, dataType) + " NOT LIKE ?"
-				value := "%" + sqlutil.EscapeLike(filter.Args[0]) + "%"
+				query := castEnumAsText(column, dataType) + " NOT LIKE ? ESCAPE '\\'"
+				value := "%" + escapeLike(filter.Args[0]) + "%"
 				return filter.Where(tx, query, value)
 			},
 			RequiredArguments: 1,
@@ -129,6 +129,15 @@ func castEnumAsText(column string, dataType DataType) string {
 		return fmt.Sprintf("CAST(%s AS TEXT)", column)
 	}
 	return column
+}
+
+// escapeLike escapes the LIKE pattern wildcards and the escape character
+// in the given value.
+func escapeLike(value string) string {
+	value = strings.ReplaceAll(value, `\`, `\\`)
+	value = strings.ReplaceAll(value, `%`, `\%`)
+	value = strings.ReplaceAll(value, `_`, `\_`)
+	return value
 }
 
 func basicComparison(op string) func(tx *gorm.DB, filter *Filter, column string, dataType DataType) *gorm.DB {
